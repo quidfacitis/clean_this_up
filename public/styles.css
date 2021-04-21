@@ -92,16 +92,6 @@
   flex-wrap: wrap;
 }
 
-.staff-member-card {
-  border: 1px solid #737078;
-  padding: 1em;
-  width: 21%;
-  height: 10em;
-  margin: 1em;
-  border-radius: 25px;
-  box-shadow: 1px 1px;
-}
-
 .staff-new-member-btn {
   height: 10em;
   width: 21%;
@@ -109,5 +99,88 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* STAFF MEMBER */
+
+.staff-member-card {
+  border: 1px solid #737078;
+  padding: 1em;
+  width: 21%;
+  height: 10em;
+  margin: 1em;
+  border-radius: 25px;
+  box-shadow: 1px 1px #737078;
+  position: relative;
+}
+
+.staff-member-card:hover {
+  box-shadow: 2px 2px #737078;
+}
+
+.staff-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #737078;
+}
+
+.staff-role {
+  margin-top: 0.5em;
+  font-size: 1.2em;
+  color: #737078;
+}
+
+.staff-card-assign-task {
+  position: absolute;
+  cursor: pointer;
+  left: 15px;
+  bottom: 10px;
+  width: 4em;
+  padding: 0.25em;
+  text-align: center;
+  border-radius: 15px;
+  color: white;
+  background-color: #b7410e;
+  font-size: 0.85em;
+}
+
+.staff-edit-delete-container {
+  width: 3em;
+  height: 1em;
+  position: absolute;
+  bottom: 10px;
+  right: 5px;
+}
+
+.staff-edit {
+  margin-right: 0.25em;
+  cursor: pointer;
+  color: #737078
+}
+
+.staff-delete {
+  cursor: pointer;
+  color: #737078
+}
+
+.staff-edit:hover,
+.staff-delete:hover {
+  color: #b7410e;
+}
+
+.staff-card-task-count {
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -10px;
+  right: -10px;
+  text-align: center;
+  border: 1px solid #737078;
+  background-color: #edeeef;
+  color: #b7410e;
 }
 
