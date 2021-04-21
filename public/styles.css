@@ -77,10 +77,37 @@
 .staff-container {
   padding-top: 1em;
   padding-left: 1em;
+  padding-right: 1em;
   flex: 1;
 }
 
 .staff-title {
   color: #737078;
+  padding-left: 0.5em;
+}
+
+.staff-member-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.staff-member-card {
+  border: 1px solid #737078;
+  padding: 1em;
+  width: 21%;
+  height: 10em;
+  margin: 1em;
+  border-radius: 25px;
+  box-shadow: 1px 1px;
+}
+
+.staff-new-member-btn {
+  height: 10em;
+  width: 21%;
+  margin: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
