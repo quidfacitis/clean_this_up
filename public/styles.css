@@ -1,0 +1,86 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-container {
+  background-color: #edeeef;
+  display: flex;
+}
+
+/* SIDEBAR */
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 17em;
+  height: 100vh;
+  background: linear-gradient(
+  rgba(20,20,20, .7),
+  rgba(20,20,20, .7)),
+  url('./assets/hanging-brooms.jpeg');
+  background-position: right bottom;
+}
+
+.app-title-container {
+  width: 90%;
+  padding-top: 1em;
+  padding-bottom: 0.25em;
+  border-bottom: 1px solid #edeeef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.app-title {
+  color: #edeeef;
+  display: inline-block;
+}
+
+.app-icon {
+  margin-left: 0.5em;
+}
+
+.menu-item-container {
+  width: 80%;
+}
+
+.menu-item {
+  width: 100%;
+  color: #edeeef;
+  margin-top: 1em;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+}
+
+.item-icon {
+  width: 30%;
+  padding-right: 1em;
+}
+
+.item-name {
+  display: inline-block;
+  width: 70%;
+  font-size: 1.4em;
+}
+
+.menu-item:hover {
+  border-bottom: 1px solid #edeeef;
+}
+
+
+/* STAFF */
+
+.staff-container {
+  padding-top: 1em;
+  padding-left: 1em;
+  flex: 1;
+}
+
+.staff-title {
+  color: #737078;
+}
+
