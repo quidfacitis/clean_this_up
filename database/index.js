@@ -35,6 +35,17 @@ const addStaffMember = (staffMemberData, callback) => {
     });
 };
 
+const getAllStaff = (callback) => {
+  Staff.find({})
+    .then((results) => {
+      callback(null, results);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+}
+
 module.exports = {
-  addStaffMember
+  addStaffMember,
+  getAllStaff
 };

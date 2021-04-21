@@ -9,13 +9,12 @@ const dummyData = [
   {name: "Alice Frasier", role: "Office crew"},
   {name: "Andy Zaltzman", role: "Night shift"},
   {name: "Nish Kumar", role: "Part time"},
-  {name: "Alice Frasier", role: "Office crew"},
   {name: "Billy Bob Thornton", role: "Kitchen crew"}
 ]
 
-const Staff = ({toggleStaffForm}) => {
+const Staff = ({toggleStaffForm, staff}) => {
 
-  const staffMembers = dummyData.map(member => <StaffMember member={member} />);
+  const staffMembers = staff.map(member => <StaffMember member={member} />);
 
   return (
     <div className="staff-container">

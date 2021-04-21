@@ -8,10 +8,20 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      staffFormOpen: false
+      staffFormOpen: false,
+      staff: []
     }
     this.toggleStaffForm = this.toggleStaffForm.bind(this);
     this.addStaffMember = this.addStaffMember.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('/staff')
+      .then((results) => {
+        this.setState({
+          staff: results.data
+        });
+      });
   }
 
   toggleStaffForm(e) {
@@ -27,8 +37,12 @@ class App extends Component {
     const id = new Date().valueOf();
     axios.post('/staff', {id, name, role})
     .then(() => {
-      this.setState({
-        staffFormOpen: !staffFormOpen
+      axios.get('/staff')
+      .then((results) => {
+        this.setState({
+          staff: results.data,
+          staffFormOpen: !staffFormOpen
+        });
       });
     })
     .catch((err) => {
@@ -37,11 +51,11 @@ class App extends Component {
   }
 
   render() {
-    const {staffFormOpen} = this.state;
+    const {staffFormOpen, staff} = this.state;
     return (
       <div className="app-container">
         <Sidebar />
-        <Staff toggleStaffForm={this.toggleStaffForm} />
+        <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
         {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
       </div>
     );

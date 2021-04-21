@@ -13,7 +13,7 @@ const StaffMember = ({member}) => {
         <span className="staff-edit"><Icon icon={editSolid} /></span>
         <span className="staff-delete"><Icon icon={delete24Filled} /></span>
       </div>
-      <div className="staff-card-task-count">3</div>
+      {/* <div className="staff-card-task-count">3</div> */}
     </div>
   );
 };
