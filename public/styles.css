@@ -184,3 +184,57 @@
   color: #b7410e;
 }
 
+/* STAFF FORM */
+
+.form-overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: auto;
+  background-color: white;
+  padding: 2.5em;
+}
+
+.staff-form {
+  display: grid;
+  grid-template-columns: 200px, 1fr;
+  grid-gap: 16px;
+}
+
+.staff-form-label {
+  grid-column: 1/2;
+  text-align: right;
+}
+
+.staff-form-input {
+  grid-column: 2/3;
+}
+
+.staff-form-title {
+  text-align: center;
+  font-weight: lighter;
+  margin-bottom: 1em;
+}
+
+.staff-form-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+

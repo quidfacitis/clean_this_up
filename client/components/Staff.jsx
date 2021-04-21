@@ -13,7 +13,7 @@ const dummyData = [
   {name: "Billy Bob Thornton", role: "Kitchen crew"}
 ]
 
-const Staff = () => {
+const Staff = ({toggleStaffForm}) => {
 
   const staffMembers = dummyData.map(member => <StaffMember member={member} />);
 
@@ -23,7 +23,7 @@ const Staff = () => {
         <h2 className="staff-title">Staff</h2>
       </div>
       <div className="staff-member-container">
-        <span className="staff-new-member-btn"><Icon icon={plusSquareFill} color="#b7410e" width="4em"/></span>
+        <span className="staff-new-member-btn" onClick={toggleStaffForm}><Icon icon={plusSquareFill} color="#b7410e" width="4em"/></span>
         {staffMembers}
       </div>
 
