@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from 'react-router-dom';
 import Staff from './Staff.jsx';
 import Sidebar from './Sidebar.jsx';
 import StaffForm from './StaffForm.jsx';
+import Dashboard from './Dashboard.jsx';
+import Tasks from './Tasks.jsx';
 import axios from 'axios';
 
 class App extends Component {
@@ -53,11 +61,23 @@ class App extends Component {
   render() {
     const {staffFormOpen, staff} = this.state;
     return (
-      <div className="app-container">
-        <Sidebar />
-        <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
-        {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
-      </div>
+      <Router>
+        <div className="app-container">
+          <Sidebar />
+          {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
+          <Switch>
+            <Route path="/tasks">
+              <Tasks />
+            </Route>
+            <Route path="/staff">
+              <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
+            </Route>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     );
   }
 
