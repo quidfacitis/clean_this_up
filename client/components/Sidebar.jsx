@@ -18,7 +18,7 @@ const Sidebar = () => {
         <Link to="/">
           <div className="menu-item">
             <span className="item-icon"><InlineIcon icon={bxsDashboard} color="#edeeef" width="1.1em"/></span>
-            <div className="item-name">Dashboard</div>
+            <div className="item-name">Assignments</div>
           </div>
         </Link>
         <Link to="/staff">

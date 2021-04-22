@@ -9,7 +9,8 @@ import Staff from './Staff.jsx';
 import Sidebar from './Sidebar.jsx';
 import StaffForm from './StaffForm.jsx';
 import TaskForm from './TaskForm.jsx';
-import Dashboard from './Dashboard.jsx';
+import AssignmentForm from './AssignmentForm.jsx';
+import Assignments from './Assignments.jsx';
 import Tasks from './Tasks.jsx';
 import axios from 'axios';
 
@@ -19,13 +20,17 @@ class App extends Component {
     this.state = {
       staffFormOpen: false,
       taskFormOpen: false,
+      assignmentFormOpen: false,
       staff: [],
-      tasks: []
+      tasks: [],
+      assignments: []
     }
     this.toggleStaffForm = this.toggleStaffForm.bind(this);
     this.toggleTaskForm = this.toggleTaskForm.bind(this);
+    this.toggleAssignmentForm = this.toggleAssignmentForm.bind(this);
     this.addStaffMember = this.addStaffMember.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.addAssignment = this.addAssignment.bind(this);
   }
 
   componentDidMount() {
@@ -46,17 +51,24 @@ class App extends Component {
       });
   }
 
-  toggleStaffForm(e) {
-    const { staffFormOpen } = this.state;
+  toggleStaffForm() {
+    const {staffFormOpen} = this.state;
     this.setState({
       staffFormOpen: !staffFormOpen
     });
   }
 
-  toggleTaskForm(e) {
-    const { taskFormOpen } = this.state;
+  toggleTaskForm() {
+    const {taskFormOpen} = this.state;
     this.setState({
       taskFormOpen: !taskFormOpen
+    });
+  }
+
+  toggleAssignmentForm() {
+    const {assignmentFormOpen} = this.state;
+    this.setState({
+      assignmentFormOpen: !assignmentFormOpen
     });
   }
 
@@ -98,14 +110,19 @@ class App extends Component {
     });
   }
 
+  addAssignment(e, name, task, urgent) {
+    console.log('ADD ASSIGNMENT!');
+  }
+
   render() {
-    const {staffFormOpen, taskFormOpen, staff, tasks} = this.state;
+    const {staffFormOpen, taskFormOpen, assignmentFormOpen, staff, tasks, assignments} = this.state;
     return (
       <Router>
         <div className="app-container">
           <Sidebar />
           {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
           {taskFormOpen && <TaskForm toggleTaskForm={this.toggleTaskForm} addTask={this.addTask} />}
+          {assignmentFormOpen && <AssignmentForm toggleAssignmentForm={this.toggleAssignmentForm} addAssignment={this.addAssignment} staff={staff} tasks={tasks} />}
           <Switch>
             <Route path="/tasks">
               <Tasks toggleTaskForm={this.toggleTaskForm} tasks={tasks} />
@@ -114,7 +131,7 @@ class App extends Component {
               <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
             </Route>
             <Route exact path="/">
-              <Dashboard />
+              <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} />
             </Route>
           </Switch>
         </div>
