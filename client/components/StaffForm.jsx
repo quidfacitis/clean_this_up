@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {Icon, InlineIcon} from '@iconify/react';
+import {InlineIcon} from '@iconify/react';
 import xIcon from '@iconify/icons-bi/x';
-
 
 class StaffForm extends Component {
   constructor(props) {

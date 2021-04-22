@@ -40,10 +40,6 @@
   display: inline-block;
 }
 
-.app-icon {
-  margin-left: 0.5em;
-}
-
 .menu-item-container {
   width: 80%;
 }
@@ -71,6 +67,11 @@
   border-bottom: 1px solid #edeeef;
 }
 
+.bottom-right-img {
+  position: fixed;
+  bottom: 2em;
+  right: 3em;
+}
 
 /* STAFF */
 
@@ -135,7 +136,7 @@
   cursor: pointer;
   left: 15px;
   bottom: 10px;
-  width: 4em;
+  width: 6.5em;
   padding: 0.25em;
   text-align: center;
   border-radius: 15px;

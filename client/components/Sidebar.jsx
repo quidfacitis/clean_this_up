@@ -12,7 +12,6 @@ const Sidebar = () => {
       <div className="app-title-container">
         <Link to="/">
           <h2 className="app-title">Clean This Up</h2>
-          <span className="app-icon"><Icon icon={broomIcon} color="#edeeef" width="1.5em"/></span>
         </Link>
       </div>
       <div className="menu-item-container">
@@ -35,7 +34,9 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-
+      <Link to="/">
+        <span className="bottom-right-img"><Icon icon={broomIcon} color="#737078" width="3em"/></span>
+      </Link>
     </div>
   );
 };

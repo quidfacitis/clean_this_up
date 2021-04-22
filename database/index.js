@@ -24,6 +24,18 @@ let staffSchema = new mongoose.Schema({
 
 const Staff = mongoose.model('Staff', staffSchema);
 
+let taskSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true,
+    index: true
+  },
+  title: String,
+  description: String
+});
+
+const Task = mongoose.model('Task', taskSchema);
+
 const addStaffMember = (staffMemberData, callback) => {
   const {id, name, role} = staffMemberData;
   Staff.create({id, name, role})
@@ -43,9 +55,32 @@ const getAllStaff = (callback) => {
     .catch((err) => {
       callback(err);
     });
-}
+};
+
+const addTask = (taskData, callback) => {
+  const {id, title, description} = taskData;
+  Task.create({id, title, description})
+    .then(() => {
+      callback(null);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+};
+
+const getAllTasks = (callback) => {
+  Task.find({})
+    .then((results) => {
+      callback(null, results);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+};
 
 module.exports = {
   addStaffMember,
-  getAllStaff
+  getAllStaff,
+  addTask,
+  getAllTasks
 };

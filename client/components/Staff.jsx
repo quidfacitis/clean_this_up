@@ -25,10 +25,8 @@ const Staff = ({toggleStaffForm, staff}) => {
         <span className="staff-new-member-btn" onClick={toggleStaffForm}><Icon icon={plusSquareFill} color="#b7410e" width="4em"/></span>
         {staffMembers}
       </div>
-
     </div>
-
-  )
+  );
 };
 
 export default Staff;
