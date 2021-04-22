@@ -36,6 +36,27 @@ let taskSchema = new mongoose.Schema({
 
 const Task = mongoose.model('Task', taskSchema);
 
+let assignmentSchema = new mongoose.Schema({
+  id: {
+    type: Number,
+    unique: true,
+    index: true
+  },
+  employee_id: {
+    type: Number,
+    index: true
+  },
+  name: String,
+  task: String,
+  urgent: Boolean,
+  messages: {
+    type: Array,
+    default: []
+  }
+});
+
+const Assignment = mongoose.model('Assignment', assignmentSchema);
+
 const addStaffMember = (staffMemberData, callback) => {
   const {id, name, role} = staffMemberData;
   Staff.create({id, name, role})
@@ -78,9 +99,32 @@ const getAllTasks = (callback) => {
     });
 };
 
+const addAssignment = (assignmentData, callback) => {
+  const {id, employee_id, name, task, urgent} = assignmentData;
+  Assignment.create({id, employee_id, name, task, urgent})
+    .then(() => {
+      callback(null);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+};
+
+const getAllAssignments = (callback) => {
+  Assignment.find({})
+    .then((results) => {
+      callback(null, results);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+};
+
 module.exports = {
   addStaffMember,
   getAllStaff,
   addTask,
-  getAllTasks
+  getAllTasks,
+  addAssignment,
+  getAllAssignments
 };

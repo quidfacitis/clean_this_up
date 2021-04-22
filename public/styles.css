@@ -27,7 +27,7 @@
 .app-title-container {
   width: 90%;
   padding-top: 1em;
-  padding-bottom: 0.25em;
+  padding-bottom: 1em;
   border-bottom: 1px solid #edeeef;
   display: flex;
   align-items: center;

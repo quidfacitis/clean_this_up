@@ -7,6 +7,7 @@ class AssignmentForm extends Component {
     super(props);
     this.state = {
       name: '',
+      employee_id: null,
       task: '',
       urgent: false
     };
@@ -15,8 +16,12 @@ class AssignmentForm extends Component {
 
   onChange(e) {
     if (e.target.id === 'employee-selector') {
+      const employee_id = e.target.value;
+      const index = e.nativeEvent.target.selectedIndex;
+      const name = e.nativeEvent.target[index].text;
       this.setState({
-        name: e.target.value
+        name,
+        employee_id
       });
     } else if (e.target.id === 'task-selector') {
       this.setState({
@@ -35,12 +40,12 @@ class AssignmentForm extends Component {
 
   render() {
     const {toggleAssignmentForm, addAssignment, staff, tasks} = this.props;
-    let {name, task, urgent} = this.state;
+    let {name, employee_id, task, urgent} = this.state;
 
     const employeeOptions = [];
     staff.forEach((s) => {
       employeeOptions.push((
-        <option value={s.name}>{s.name}</option>
+        <option value={s.id}>{s.name}</option>
       ));
     });
 
@@ -55,7 +60,7 @@ class AssignmentForm extends Component {
       <div className="form-overlay">
         <div className="form-container">
           <h2 className="staff-form-title">Create New Assignment</h2>
-          <form className="staff-form" onSubmit={(e) => addAssignment(e, name, task, urgent)}>
+          <form className="staff-form" onSubmit={(e) => addAssignment(e, name, task, urgent, employee_id)}>
             <label className="staff-form-label" htmlFor="employee-selector">Employee Name</label>
             <select onChange={this.onChange} id="employee-selector" defaultValue="placeholder" required>
               <option value="placeholder" disabled>Select employee</option>

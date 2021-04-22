@@ -1,6 +1,13 @@
 const express = require('express');
 const path = require('path');
-const {addStaffMember, getAllStaff, addTask, getAllTasks} = require('./database/index');
+const {
+  addStaffMember,
+  getAllStaff,
+  addTask,
+  getAllTasks,
+  addAssignment,
+  getAllAssignments
+} = require('./database/index');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,6 +46,26 @@ app.post('/api/tasks', (req, res) => {
 
 app.get('/api/tasks', (req, res) => {
   getAllTasks((err, results) => {
+    if (err !== null) {
+      res.sendStatus(404);
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+app.post('/api/assignments', (req,res) => {
+  addAssignment(req.body, (err) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
+
+app.get('/api/assignments', (req, res) => {
+  getAllAssignments((err, results) => {
     if (err !== null) {
       res.sendStatus(404);
     } else {

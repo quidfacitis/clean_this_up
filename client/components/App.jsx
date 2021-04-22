@@ -35,15 +35,21 @@ class App extends Component {
 
   componentDidMount() {
     let staff;
+    let tasks;
     axios.get('/api/staff')
       .then((results) => {
         staff = results.data;
         axios.get('/api/tasks')
           .then((res) => {
-            this.setState({
-              staff,
-              tasks: res.data,
-            });
+            tasks = res.data;
+            axios.get('/api/assignments')
+              .then((r) => {
+                this.setState({
+                  staff,
+                  tasks,
+                  assignments: r.data
+                });
+              });
           });
       })
       .catch((err) => {
@@ -110,8 +116,23 @@ class App extends Component {
     });
   }
 
-  addAssignment(e, name, task, urgent) {
-    console.log('ADD ASSIGNMENT!');
+  addAssignment(e, name, task, urgent, employee_id) {
+    e.preventDefault();
+    const {assignmentFormOpen} = this.state;
+    const id = new Date().valueOf();
+    axios.post('/api/assignments', {id, employee_id, name, task, urgent})
+    .then(() => {
+      axios.get('/api/assignments')
+      .then((results) => {
+        this.setState({
+          assignments: results.data,
+          assignmentFormOpen: !assignmentFormOpen
+        });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
   render() {
