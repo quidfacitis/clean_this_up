@@ -35,6 +35,9 @@ class App extends Component {
     this.addStaffMember = this.addStaffMember.bind(this);
     this.addTask = this.addTask.bind(this);
     this.addAssignment = this.addAssignment.bind(this);
+    this.deleteAssignment = this.deleteAssignment.bind(this);
+    this.deleteStaff = this.deleteStaff.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   componentDidMount() {
@@ -153,6 +156,51 @@ class App extends Component {
     });
   }
 
+  deleteAssignment(id) {
+    axios.delete(`/api/assignments/${id}`)
+      .then(() => {
+        axios.get('/api/assignments')
+          .then((results) => {
+            this.setState({
+              assignments: results.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('Unable to delete assignment. Error message: ', err);
+      });
+  }
+
+  deleteStaff(id) {
+    axios.delete(`/api/staff/${id}`)
+      .then(() => {
+        axios.get('/api/staff')
+          .then((results) => {
+            this.setState({
+              staff: results.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('Unable to delete staff member. Error message: ', err);
+      });
+  }
+
+  deleteTask(id) {
+    axios.delete(`/api/tasks/${id}`)
+      .then(() => {
+        axios.get('/api/tasks')
+          .then((results) => {
+            this.setState({
+              tasks: results.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('Unable to delete task. Error message: ', err);
+      });
+  }
+
   render() {
     const {
       staffFormOpen,
@@ -175,13 +223,13 @@ class App extends Component {
           {messageModalOpen && <MessageModal toggleMessageModal={this.toggleMessageModal} selectedAssignment={selectedAssignment} /> }
           <Switch>
             <Route path="/tasks">
-              <Tasks toggleTaskForm={this.toggleTaskForm} tasks={tasks} />
+              <Tasks toggleTaskForm={this.toggleTaskForm} tasks={tasks} deleteTask={this.deleteTask} />
             </Route>
             <Route path="/staff">
-              <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
+              <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} deleteStaff={this.deleteStaff} />
             </Route>
             <Route exact path="/">
-              <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} toggleMessageModal={this.toggleMessageModal} />
+              <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} toggleMessageModal={this.toggleMessageModal} deleteAssignment={this.deleteAssignment} />
             </Route>
           </Switch>
         </div>

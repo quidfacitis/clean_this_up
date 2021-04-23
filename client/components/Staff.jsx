@@ -12,9 +12,10 @@ const dummyData = [
   {name: "Billy Bob Thornton", role: "Kitchen crew"}
 ]
 
-const Staff = ({toggleStaffForm, staff}) => {
+const Staff = ({toggleStaffForm, staff, deleteStaff}) => {
 
-  const staffMembers = staff.map(member => <StaffMember member={member} />);
+  let keyCount = 0;
+  const staffMembers = staff.map(member => <StaffMember key={keyCount++} member={member} deleteStaff={deleteStaff} />);
 
   return (
     <div className="staff-container">

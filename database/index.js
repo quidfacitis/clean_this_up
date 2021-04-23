@@ -148,6 +148,36 @@ const getOneAssignment = (id, callback) => {
     });
 }
 
+const deleteAssignment = (id, callback) => {
+  Assignment.deleteOne({id}, (err) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
+    }
+  });
+}
+
+const deleteStaff = (id, callback) => {
+  Staff.deleteOne({id}, (err) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
+    }
+  });
+}
+
+const deleteTask = (id, callback) => {
+  Task.deleteOne({id}, (err) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
+    }
+  });
+}
+
 module.exports = {
   addStaffMember,
   getAllStaff,
@@ -155,5 +185,8 @@ module.exports = {
   getAllTasks,
   addAssignment,
   getAllAssignments,
-  getOneAssignment
+  getOneAssignment,
+  deleteAssignment,
+  deleteStaff,
+  deleteTask
 };

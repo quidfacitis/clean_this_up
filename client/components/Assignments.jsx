@@ -22,14 +22,15 @@ class Assignments extends Component {
   }
 
   render() {
-    let {assignments, toggleAssignmentForm, toggleMessageModal} = this.props;
+    let {assignments, toggleAssignmentForm, toggleMessageModal, deleteAssignment} = this.props;
     const {checked} = this.state;
 
     if (checked) {
       assignments = assignments.filter((a) => a.urgent === true);
     }
 
-    const assignmentItems = assignments.map(a => <AssignmentItem assignment={a} toggleMessageModal={toggleMessageModal} />);
+    let keyCount = 0;
+    const assignmentItems = assignments.map(a => <AssignmentItem key={keyCount++} assignment={a} toggleMessageModal={toggleMessageModal} deleteAssignment={deleteAssignment} />);
 
     return (
       <div className="staff-container">

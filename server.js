@@ -7,7 +7,10 @@ const {
   getAllTasks,
   addAssignment,
   getAllAssignments,
-  getOneAssignment
+  getOneAssignment,
+  deleteAssignment,
+  deleteStaff,
+  deleteTask
 } = require('./database/index');
 
 const app = express();
@@ -81,6 +84,36 @@ app.get('/api/assignments/:id', (req, res) => {
       res.sendStatus(404);
     } else {
       res.send(results);
+    }
+  });
+});
+
+app.delete('/api/assignments/:id', (req, res) => {
+  deleteAssignment(req.params.id, (err) => {
+    if (err !== null) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.delete('/api/staff/:id', (req, res) => {
+  deleteStaff(req.params.id, (err) => {
+    if (err !== null) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
+    }
+  });
+});
+
+app.delete('/api/tasks/:id', (req, res) => {
+  deleteTask(req.params.id, (err) => {
+    if (err !== null) {
+      res.sendStatus(500);
+    } else {
+      res.sendStatus(204);
     }
   });
 });
