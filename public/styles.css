@@ -223,6 +223,7 @@
 }
 
 .staff-form-input {
+  resize: none;
   grid-column: 2/3;
 }
 
@@ -289,4 +290,26 @@
   width: 15%;
 }
 
+/* ASSIGNMENTS */
 
+.assignment-navbar {
+  display: flex;
+}
+
+.urgent-switch-container {
+  display: flex;
+  align-items: center;
+  margin-left: 7.7em;
+}
+
+.urgent-switch-msg {
+  margin-right: 0.5em;
+  display: flex;
+  align-items: center;
+  color: #737078;
+  font-weight: bold;
+}
+
+.urgent-switch-icon {
+  margin-left: 0.25em;
+}
