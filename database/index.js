@@ -100,14 +100,32 @@ const getAllTasks = (callback) => {
 };
 
 const addAssignment = (assignmentData, callback) => {
-  const {id, employee_id, name, task, urgent} = assignmentData;
-  Assignment.create({id, employee_id, name, task, urgent})
-    .then(() => {
-      callback(null);
+  // check if POST is for new message
+  if (assignmentData.message_id !== undefined) {
+    const {id, message_id, admin, content} = assignmentData;
+    Assignment.find({id})
+    .then((results) => {
+      const messages = results[0].messages;
+      messages.push({message_id, admin, content});
+      Assignment.findOneAndUpdate({id}, {messages})
+        .then(() => {
+          callback(null);
+        });
     })
     .catch((err) => {
       callback(err);
     });
+  // if not for new message, create new Assignment
+  } else {
+    const {id, employee_id, name, task, urgent} = assignmentData;
+    Assignment.create({id, employee_id, name, task, urgent})
+      .then(() => {
+        callback(null);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+  }
 };
 
 const getAllAssignments = (callback) => {
