@@ -202,7 +202,7 @@
   position: fixed;
   top: 25%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -25%);
   width: fit-content;
   border: 1px solid black;
   border-radius: 10px;
@@ -236,6 +236,57 @@
   position: absolute;
   top: 5px;
   right: 5px;
+}
+
+/* MESSAGE MODAL */
+
+.message-area {
+  height: 40vh;
+  width: 40vw;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.chat-msg {
+  margin-bottom: 0.5em;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.chat-timestamp {
+  margin-top: 0.25em;
+  font-size: 0.75em;
+  text-align: right;
+}
+
+.admin-msg {
+  align-self: flex-end;
+  border: 1px solid black;
+  padding: 0.5em;
+  border-radius: 15px;
+  width: fit-content;
+  background-color: #4cac84;
+  color: white;
+}
+
+.message-input-and-submit {
+  display: flex;
+  height: 3em;
+}
+
+.message-input {
+  width: 85%;
+  resize: none;
+  padding: 0.5em;
+}
+
+.message-submit-btn {
+  width: 15%;
 }
 
 

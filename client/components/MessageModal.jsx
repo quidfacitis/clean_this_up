@@ -51,8 +51,12 @@ class MessageModal extends Component {
 
     const messageItems = [];
     messages.forEach((m) => {
-      messageItems.push((
-        <div className={m.admin ? "admin-msg" : "employee-msg"}>{m.content}</div>
+      const date = new Date(m.message_id).toLocaleString().split(' ').slice(0, 5).join(' ');
+      messageItems.unshift((
+        <div className="chat-msg">
+          <div className={m.admin ? "admin-msg" : "employee-msg"}>{m.content}</div>
+          <div className="chat-timestamp">{date}</div>
+        </div>
       ));
     });
 
@@ -64,8 +68,10 @@ class MessageModal extends Component {
             {messageItems}
           </div>
           <form className="staff-form" onSubmit={(e) => this.addMessage(e, selectedAssignment, newMessage)}>
-            <input className="message-input" type="text" onChange={this.onChange} value={newMessage} required />
-            <input className="message-submit-btn" type="submit" value="Send" />
+            <div className="message-input-and-submit">
+              <textarea className="message-input" onChange={this.onChange} value={newMessage} required></textarea>
+              <input className="message-submit-btn" type="submit" value="Send" />
+            </div>
           </form>
           <span onClick={toggleMessageModal} className="staff-form-close"><InlineIcon icon={xIcon} width="2em" /></span>
         </div>
