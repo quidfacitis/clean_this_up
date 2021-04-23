@@ -138,11 +138,22 @@ const getAllAssignments = (callback) => {
     });
 };
 
+const getOneAssignment = (id, callback) => {
+  Assignment.find({id})
+    .then((results) => {
+      callback(null, results);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+}
+
 module.exports = {
   addStaffMember,
   getAllStaff,
   addTask,
   getAllTasks,
   addAssignment,
-  getAllAssignments
+  getAllAssignments,
+  getOneAssignment
 };

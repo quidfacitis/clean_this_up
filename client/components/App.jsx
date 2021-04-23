@@ -10,6 +10,7 @@ import Sidebar from './Sidebar.jsx';
 import StaffForm from './StaffForm.jsx';
 import TaskForm from './TaskForm.jsx';
 import AssignmentForm from './AssignmentForm.jsx';
+import MessageModal from './MessageModal.jsx';
 import Assignments from './Assignments.jsx';
 import Tasks from './Tasks.jsx';
 import axios from 'axios';
@@ -21,13 +22,16 @@ class App extends Component {
       staffFormOpen: false,
       taskFormOpen: false,
       assignmentFormOpen: false,
+      messageModalOpen: false,
       staff: [],
       tasks: [],
-      assignments: []
+      assignments: [],
+      selectedAssignment: null
     }
     this.toggleStaffForm = this.toggleStaffForm.bind(this);
     this.toggleTaskForm = this.toggleTaskForm.bind(this);
     this.toggleAssignmentForm = this.toggleAssignmentForm.bind(this);
+    this.toggleMessageModal = this.toggleMessageModal.bind(this);
     this.addStaffMember = this.addStaffMember.bind(this);
     this.addTask = this.addTask.bind(this);
     this.addAssignment = this.addAssignment.bind(this);
@@ -76,6 +80,20 @@ class App extends Component {
     this.setState({
       assignmentFormOpen: !assignmentFormOpen
     });
+  }
+
+  toggleMessageModal(assignment) {
+    const {messageModalOpen} = this.state;
+    if (assignment.id !== undefined) {
+      this.setState({
+        messageModalOpen: !messageModalOpen,
+        selectedAssignment: assignment
+      });
+    } else {
+      this.setState({
+        messageModalOpen: !messageModalOpen,
+      });
+    }
   }
 
   addTask(e, title, description) {
@@ -136,7 +154,17 @@ class App extends Component {
   }
 
   render() {
-    const {staffFormOpen, taskFormOpen, assignmentFormOpen, staff, tasks, assignments} = this.state;
+    const {
+      staffFormOpen,
+      taskFormOpen,
+      assignmentFormOpen,
+      messageModalOpen,
+      staff,
+      tasks,
+      assignments,
+      selectedAssignment
+    } = this.state;
+
     return (
       <Router>
         <div className="app-container">
@@ -144,6 +172,7 @@ class App extends Component {
           {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
           {taskFormOpen && <TaskForm toggleTaskForm={this.toggleTaskForm} addTask={this.addTask} />}
           {assignmentFormOpen && <AssignmentForm toggleAssignmentForm={this.toggleAssignmentForm} addAssignment={this.addAssignment} staff={staff} tasks={tasks} />}
+          {messageModalOpen && <MessageModal toggleMessageModal={this.toggleMessageModal} selectedAssignment={selectedAssignment} /> }
           <Switch>
             <Route path="/tasks">
               <Tasks toggleTaskForm={this.toggleTaskForm} tasks={tasks} />
@@ -152,7 +181,7 @@ class App extends Component {
               <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} />
             </Route>
             <Route exact path="/">
-              <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} />
+              <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} toggleMessageModal={this.toggleMessageModal} />
             </Route>
           </Switch>
         </div>

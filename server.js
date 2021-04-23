@@ -6,7 +6,8 @@ const {
   addTask,
   getAllTasks,
   addAssignment,
-  getAllAssignments
+  getAllAssignments,
+  getOneAssignment
 } = require('./database/index');
 
 const app = express();
@@ -66,6 +67,16 @@ app.post('/api/assignments', (req,res) => {
 
 app.get('/api/assignments', (req, res) => {
   getAllAssignments((err, results) => {
+    if (err !== null) {
+      res.sendStatus(404);
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+app.get('/api/assignments/:id', (req, res) => {
+  getOneAssignment(req.params.id, (err, results) => {
     if (err !== null) {
       res.sendStatus(404);
     } else {

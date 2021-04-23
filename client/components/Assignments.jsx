@@ -3,8 +3,8 @@ import { Icon } from '@iconify/react';
 import plusSquareFill from '@iconify/icons-bi/plus-square-fill';
 import AssignmentItem from './AssignmentItem.jsx';
 
-const Assignments = ({assignments, toggleAssignmentForm}) => {
-  const assignmentItems = assignments.map(a => <AssignmentItem assignment={a} />);
+const Assignments = ({assignments, toggleAssignmentForm, toggleMessageModal}) => {
+  const assignmentItems = assignments.map(a => <AssignmentItem assignment={a} toggleMessageModal={toggleMessageModal} />);
 
   return (
     <div className="staff-container">
