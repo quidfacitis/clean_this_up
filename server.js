@@ -11,7 +11,8 @@ const {
   deleteAssignment,
   deleteStaff,
   deleteTask,
-  authenticate
+  authenticate,
+  getEmployeeAssignments
 } = require('./database/index');
 
 const app = express();
@@ -120,9 +121,18 @@ app.delete('/api/tasks/:id', (req, res) => {
 });
 
 app.post('/api/auth', (req, res) => {
-  console.log(req.body); // print out password and email
-
   authenticate(req.body, (err, results) => {
+    if (err !== null) {
+      res.sendStatus(404);
+    } else {
+      res.send({ employeeId: results });
+    }
+  });
+});
+
+app.get('/api/auth/:id', (req, res) => {
+  const employeeId = req.params.id;
+  getEmployeeAssignments(employeeId, (err, results) => {
     if (err !== null) {
       res.sendStatus(404);
     } else {

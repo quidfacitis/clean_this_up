@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import AssignmentItem from '../components/AssignmentItem';
 
-const AssignmentList = ({ assignments, navigation }) => {
+const AssignmentList = ({ employeeId, navigation }) => {
+  const [assignments, setAssignments] = useState([]);
+  const fetchAssignments = useCallback(async () => {
+    const result = await fetch(`http://localhost:3000/api/auth/${employeeId}`);
+    if (result.ok) {
+      let fetchedAssignments = await result.json();
+      setAssignments(fetchedAssignments);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    fetchAssignments();
+    const fetchAssignmentsInterval = setInterval(fetchAssignments, 3000);
+    return () => {
+      clearInterval(fetchAssignmentsInterval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <FlatList
       style={styles.list}

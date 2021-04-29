@@ -197,15 +197,26 @@ const deleteTask = (id, callback) => {
 const authenticate = (authData, callback) => {
   Staff.find({email: authData.email, password: authData.password})
   .then((results) => {
-    Assignment.find({employee_id: results[0].id})
-      .then((res) => {
-        callback(null, res);
-      });
+    // Assignment.find({employee_id: results[0].id})
+    //   .then((res) => {
+    //     callback(null, res);
+    //   });
+    callback(null, results[0].id);
   })
   .catch((err) => {
     callback(err);
   });
-}
+};
+
+const getEmployeeAssignments = (employeeId, callback) => {
+  Assignment.find({employee_id: employeeId})
+    .then((results) => {
+      callback(null, results);
+    })
+    .catch((err) => {
+      callback(err);
+    });
+};
 
 module.exports = {
   addStaffMember,
@@ -218,5 +229,6 @@ module.exports = {
   deleteAssignment,
   deleteStaff,
   deleteTask,
-  authenticate
+  authenticate,
+  getEmployeeAssignments
 };

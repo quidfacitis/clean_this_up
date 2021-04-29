@@ -3,7 +3,6 @@ import {
   SafeAreaView,
   Text,
   TextInput,
-  View,
   Button,
   StyleSheet,
 } from 'react-native';
@@ -11,25 +10,6 @@ import {
 const Login = ({ login }) => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-
-  // const login = useCallback(async () => {
-  //   const result = await fetch('http://localhost:3000/api/auth', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       email,
-  //       password,
-  //     }),
-  //   });
-  //   if (result.ok) {
-  //     const fetchedEmployeeId = await result.json();
-  //     setEmployeeId(fetchedEmployeeId);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [email, password]);
 
   return (
     <SafeAreaView style={styles.container}>

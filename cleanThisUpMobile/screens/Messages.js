@@ -55,7 +55,6 @@ const Messages = ({ route }) => {
     return () => {
       clearInterval(fetchMsgsInterval);
     };
-    // fetchMsgs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

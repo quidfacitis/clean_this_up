@@ -13,7 +13,8 @@ class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      assignments: [],
+      // assignments: [],
+      employeeId: null,
       signedIn: false,
     };
     this.login = this.login.bind(this);
@@ -32,16 +33,16 @@ class App extends PureComponent {
       }),
     });
     if (result.ok) {
-      const assignments = await result.json();
+      const employeeId = await result.json();
       this.setState({
-        assignments,
+        employeeId: employeeId.employeeId,
         signedIn: true,
       });
     }
   }
 
   render() {
-    const { assignments, signedIn } = this.state;
+    const { employeeId, signedIn } = this.state;
     return (
       <SafeAreaView style={styles.container}>
         {!signedIn ? (
@@ -50,9 +51,7 @@ class App extends PureComponent {
           <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name="Clean This Up">
-                {props => (
-                  <AssignmentList {...props} assignments={assignments} />
-                )}
+                {props => <AssignmentList {...props} employeeId={employeeId} />}
               </Stack.Screen>
               <Stack.Screen
                 name="Messages"
@@ -79,13 +78,5 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
-
-// <SafeAreaView style={styles.container}>
-//   {!signedIn && <Login login={this.login} />}
-//   {signedIn && <AssignmentList assignments={assignments} />}
-// </SafeAreaView>
-
-// <Stack.Screen name="Home" component={HomeScreen} />
-// <Stack.Screen name="Details" component={DetailsScreen} />
 
 export default App;
