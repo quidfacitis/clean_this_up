@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, View, Text, Switch, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const AssignmentItem = ({ assignment }) => {
+const AssignmentItem = ({ assignment, handlePress }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
@@ -18,7 +18,7 @@ const AssignmentItem = ({ assignment }) => {
           onValueChange={toggleSwitch}
           value={isEnabled}
         />
-        <TouchableOpacity style={styles.chatIcon}>
+        <TouchableOpacity style={styles.chatIcon} onPress={handlePress}>
           <Icon name="comment-o" size={30} color="#4cac84" />
         </TouchableOpacity>
       </View>

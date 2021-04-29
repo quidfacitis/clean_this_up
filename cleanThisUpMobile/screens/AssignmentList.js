@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import AssignmentItem from '../components/AssignmentItem';
 
-const AssignmentList = ({ assignments }) => {
+const AssignmentList = ({ assignments, navigation }) => {
   return (
     <FlatList
       style={styles.list}
@@ -11,7 +11,12 @@ const AssignmentList = ({ assignments }) => {
       keyExtractor={item => item.id}
       renderItem={({ item }) => (
         <View>
-          <AssignmentItem assignment={item} />
+          <AssignmentItem
+            assignment={item}
+            handlePress={() => {
+              navigation.navigate('Messages', item);
+            }}
+          />
         </View>
       )}
     />
