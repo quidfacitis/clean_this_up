@@ -40,7 +40,15 @@ const AssignmentItem = ({ assignment, handlePress }) => {
         />
         <TouchableOpacity style={styles.chatIcon} onPress={handlePress}>
           <Icon name="comment-o" size={30} color="#4cac84" />
+          <View style={styles.angleIcon}>
+            <Icon name="angle-right" size={25} color="#4cac84" />
+          </View>
         </TouchableOpacity>
+        {assignment.urgent && (
+          <View style={styles.urgentIcon}>
+            <Icon name="exclamation" size={20} color="#4cac84" />
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -76,6 +84,25 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
     right: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  angleIcon: {
+    marginLeft: 5,
+  },
+  urgentIcon: {
+    position: 'absolute',
+    bottom: 10,
+    left: 15,
+    height: 30,
+    width: 30,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#4cac84',
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
   },
 });
 
