@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { TouchableOpacity, View, Text, Switch, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const AssignmentItem = ({ assignment, handlePress }) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [isEnabled, setIsEnabled] = useState(assignment.done);
+  const toggleSwitch = () => {
+    toggleDone();
+  };
+
+  const toggleDone = useCallback(async () => {
+    const result = await fetch('http://localhost:3000/api/assignments', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: assignment.id,
+        done: !isEnabled,
+      }),
+    });
+    if (result.ok) {
+      setIsEnabled(previousState => !previousState);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isEnabled]);
 
   return (
     <TouchableOpacity>
       <View style={styles.card}>
         <Text style={styles.taskName}>{assignment.task}</Text>
-        <Text style={styles.dueBy}>Mon, May 3 @ 5:00 p.m.</Text>
+        <Text style={styles.dueBy}>{assignment.dueBy}</Text>
         <Switch
           trackColor={{ false: '#737078', true: '#4cac84' }}
           thumbColor={isEnabled ? '#edeeef' : '#edeeef'}
