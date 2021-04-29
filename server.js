@@ -10,7 +10,8 @@ const {
   getOneAssignment,
   deleteAssignment,
   deleteStaff,
-  deleteTask
+  deleteTask,
+  authenticate
 } = require('./database/index');
 
 const app = express();
@@ -114,6 +115,19 @@ app.delete('/api/tasks/:id', (req, res) => {
       res.sendStatus(500);
     } else {
       res.sendStatus(204);
+    }
+  });
+});
+
+app.post('/api/auth', (req, res) => {
+  console.log(req.body); // print out password and email
+
+  authenticate(req.body, (err, results) => {
+    if (err !== null) {
+      res.sendStatus(404);
+    } else {
+      console.log(results);
+      res.send(results);
     }
   });
 });

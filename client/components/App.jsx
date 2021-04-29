@@ -118,11 +118,11 @@ class App extends Component {
     });
   }
 
-  addStaffMember(e, name, role) {
+  addStaffMember(e, name, role, email) {
     e.preventDefault();
     const {staffFormOpen} = this.state;
     const id = new Date().valueOf();
-    axios.post('/api/staff', {id, name, role})
+    axios.post('/api/staff', {id, name, role, email})
     .then(() => {
       axios.get('/api/staff')
       .then((results) => {

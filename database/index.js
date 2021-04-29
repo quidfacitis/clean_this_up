@@ -19,7 +19,9 @@ let staffSchema = new mongoose.Schema({
     index: true
   },
   name: String,
-  role: String
+  role: String,
+  password: String,
+  email: String
 });
 
 const Staff = mongoose.model('Staff', staffSchema);
@@ -58,8 +60,8 @@ let assignmentSchema = new mongoose.Schema({
 const Assignment = mongoose.model('Assignment', assignmentSchema);
 
 const addStaffMember = (staffMemberData, callback) => {
-  const {id, name, role} = staffMemberData;
-  Staff.create({id, name, role})
+  const {id, name, role, email} = staffMemberData;
+  Staff.create({id, name, role, email, password: 'password'})
     .then(() => {
       callback(null);
     })
@@ -146,7 +148,7 @@ const getOneAssignment = (id, callback) => {
     .catch((err) => {
       callback(err);
     });
-}
+};
 
 const deleteAssignment = (id, callback) => {
   Assignment.deleteOne({id}, (err) => {
@@ -156,7 +158,7 @@ const deleteAssignment = (id, callback) => {
       callback(null);
     }
   });
-}
+};
 
 const deleteStaff = (id, callback) => {
   Staff.deleteOne({id}, (err) => {
@@ -166,7 +168,7 @@ const deleteStaff = (id, callback) => {
       callback(null);
     }
   });
-}
+};
 
 const deleteTask = (id, callback) => {
   Task.deleteOne({id}, (err) => {
@@ -175,6 +177,19 @@ const deleteTask = (id, callback) => {
     } else {
       callback(null);
     }
+  });
+};
+
+const authenticate = (authData, callback) => {
+  Staff.find({email: authData.email, password: authData.password})
+  .then((results) => {
+    Assignment.find({employee_id: results[0].id})
+      .then((res) => {
+        callback(null, res);
+      });
+  })
+  .catch((err) => {
+    callback(err);
   });
 }
 
@@ -188,5 +203,6 @@ module.exports = {
   getOneAssignment,
   deleteAssignment,
   deleteStaff,
-  deleteTask
+  deleteTask,
+  authenticate
 };
