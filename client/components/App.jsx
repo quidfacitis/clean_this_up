@@ -137,11 +137,11 @@ class App extends Component {
     });
   }
 
-  addAssignment(e, name, task, urgent, employee_id) {
+  addAssignment(e, name, task, urgent, employee_id, dueBy) {
     e.preventDefault();
     const {assignmentFormOpen} = this.state;
     const id = new Date().valueOf();
-    axios.post('/api/assignments', {id, employee_id, name, task, urgent})
+    axios.post('/api/assignments', {id, employee_id, name, task, urgent, dueBy})
     .then(() => {
       axios.get('/api/assignments')
       .then((results) => {

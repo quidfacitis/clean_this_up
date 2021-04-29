@@ -49,11 +49,12 @@ class MessageModal extends Component {
     const {toggleMessageModal, selectedAssignment} = this.props;
     let {newMessage, messages} = this.state;
 
+    let keyCount = 0;
     const messageItems = [];
     messages.forEach((m) => {
       const date = new Date(m.message_id).toLocaleString().split(' ').slice(0, 5).join(' ');
       messageItems.unshift((
-        <div className="chat-msg">
+        <div key={keyCount++} className="chat-msg">
           <div className={m.admin ? "admin-msg" : "employee-msg"}>{m.content}</div>
           <div className="chat-timestamp">{date}</div>
         </div>

@@ -9,7 +9,8 @@ class AssignmentForm extends Component {
       name: '',
       employee_id: null,
       task: '',
-      urgent: false
+      urgent: false,
+      dueBy: ''
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -27,6 +28,10 @@ class AssignmentForm extends Component {
       this.setState({
         task: e.target.value
       });
+    } else if (e.target.id === 'due-by') {
+      this.setState({
+        dueBy: e.target.value
+      })
     } else if (e.target.id === 'urgent-radio-btn') {
       this.setState({
         urgent: true
@@ -40,19 +45,21 @@ class AssignmentForm extends Component {
 
   render() {
     const {toggleAssignmentForm, addAssignment, staff, tasks} = this.props;
-    let {name, employee_id, task, urgent} = this.state;
+    let {name, employee_id, task, urgent, dueBy} = this.state;
 
     const employeeOptions = [];
+    let keyCount = 0;
     staff.forEach((s) => {
       employeeOptions.push((
-        <option value={s.id}>{s.name}</option>
+        <option key={keyCount++} value={s.id}>{s.name}</option>
       ));
     });
 
+    keyCount = 0;
     const taskOptions = [];
     tasks.forEach((t) => {
       taskOptions.push((
-        <option value={t.title}>{t.title}</option>
+        <option key={keyCount++} value={t.title}>{t.title}</option>
       ));
     });
 
@@ -60,7 +67,7 @@ class AssignmentForm extends Component {
       <div className="form-overlay">
         <div className="form-container">
           <h2 className="staff-form-title">Create New Assignment</h2>
-          <form className="staff-form" onSubmit={(e) => addAssignment(e, name, task, urgent, employee_id)}>
+          <form className="staff-form" onSubmit={(e) => addAssignment(e, name, task, urgent, employee_id, dueBy)}>
             <label className="staff-form-label" htmlFor="employee-selector">Employee Name</label>
             <select onChange={this.onChange} id="employee-selector" defaultValue="placeholder" required>
               <option value="placeholder" disabled>Select employee</option>
@@ -71,6 +78,8 @@ class AssignmentForm extends Component {
               <option value="placeholder" disabled>Select task</option>
               {taskOptions.length > 0 && taskOptions}
             </select>
+            <label className="staff-form-label" htmlFor="due-by">Due By</label>
+            <input type="text" id="due-by" onChange={this.onChange} value={dueBy} required />
             <label className="staff-form-label" htmlFor="urgent-radio-btn">Urgent</label>
             <input type="radio" name="urgency" value="urgent" id="urgent-radio-btn" onChange={this.onChange}/>
             <label className="staff-form-label" htmlFor="not-urgent-radio-btn">Not Urgent</label>

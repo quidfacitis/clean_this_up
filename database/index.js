@@ -51,6 +51,11 @@ let assignmentSchema = new mongoose.Schema({
   name: String,
   task: String,
   urgent: Boolean,
+  done: {
+    type: Boolean,
+    default: false
+  },
+  dueBy: String,
   messages: {
     type: Array,
     default: []
@@ -117,10 +122,19 @@ const addAssignment = (assignmentData, callback) => {
     .catch((err) => {
       callback(err);
     });
-  // if not for new message, create new Assignment
+  } else if (assignmentData.done !== undefined) {
+    const {id, done} = assignmentData;
+    Assignment.findOneAndUpdate({id}, {done})
+      .then(() => {
+        callback(null);
+      })
+      .catch((err) => {
+        callback(err);
+      });
+    // if not for adding new message or updating 'done' value, create new Assignment
   } else {
-    const {id, employee_id, name, task, urgent} = assignmentData;
-    Assignment.create({id, employee_id, name, task, urgent})
+    const {id, employee_id, name, task, urgent, dueBy} = assignmentData;
+    Assignment.create({id, employee_id, name, task, urgent, dueBy})
       .then(() => {
         callback(null);
       })
