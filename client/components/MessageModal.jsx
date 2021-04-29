@@ -56,7 +56,7 @@ class MessageModal extends Component {
       messageItems.unshift((
         <div key={keyCount++} className="chat-msg">
           <div className={m.admin ? "admin-msg" : "employee-msg"}>{m.content}</div>
-          <div className="chat-timestamp">{date}</div>
+          <div className={m.admin ? "admin-chat-timestamp" : "employee-chat-timestamp"}>{date}</div>
         </div>
       ));
     });
