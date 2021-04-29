@@ -3,6 +3,7 @@ import {
   SafeAreaView,
   Text,
   TextInput,
+  View,
   Button,
   StyleSheet,
 } from 'react-native';
@@ -32,7 +33,8 @@ const Login = ({ login }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Email</Text>
+      <Text style={styles.titleText}>Clean This Up</Text>
+      <Text style={styles.label}>Email</Text>
       <TextInput
         style={styles.input}
         value={email}
@@ -41,7 +43,7 @@ const Login = ({ login }) => {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <Text>Password</Text>
+      <Text style={styles.label}>Password</Text>
       <TextInput
         style={styles.input}
         value={password}
@@ -54,6 +56,7 @@ const Login = ({ login }) => {
       <Button
         onPress={() => login(email, password)}
         title="Sign In"
+        color="white"
         accessibilityLabel="Sign in button"
       />
     </SafeAreaView>
@@ -63,13 +66,32 @@ const Login = ({ login }) => {
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: 'grey',
-    padding: 5,
+    borderColor: 'white',
+    borderRadius: 15,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     marginBottom: 20,
+    height: 30,
+    backgroundColor: 'white',
+  },
+  label: {
+    color: 'white',
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingBottom: 5,
   },
   container: {
     flex: 1,
-    padding: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 100,
+    backgroundColor: '#4cac84',
+  },
+  titleText: {
+    color: 'white',
+    fontSize: 40,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingBottom: 20,
   },
 });
 

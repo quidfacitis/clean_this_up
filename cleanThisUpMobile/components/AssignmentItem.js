@@ -34,7 +34,7 @@ const AssignmentItem = ({ assignment, handlePress }) => {
         <Switch
           trackColor={{ false: '#737078', true: '#4cac84' }}
           thumbColor={isEnabled ? '#edeeef' : '#edeeef'}
-          ios_backgroundColor="#edeeef"
+          ios_backgroundColor="#737078"
           onValueChange={toggleSwitch}
           value={isEnabled}
         />
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     marginVertical: 10,
+    backgroundColor: 'white',
   },
   taskName: {
     fontSize: 20,

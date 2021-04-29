@@ -49,7 +49,7 @@ class App extends PureComponent {
         ) : (
           <NavigationContainer>
             <Stack.Navigator>
-              <Stack.Screen name="AssignmentList">
+              <Stack.Screen name="Clean This Up">
                 {props => (
                   <AssignmentList {...props} assignments={assignments} />
                 )}
@@ -57,7 +57,13 @@ class App extends PureComponent {
               <Stack.Screen
                 name="Messages"
                 component={Messages}
-                options={{ title: 'Messages' }}
+                // options={{ title: 'Messages' }}
+                options={({ route }) => ({
+                  title: route.params.task,
+                  headerStyle: {
+                    backgroundColor: 'white',
+                  },
+                })}
               />
             </Stack.Navigator>
           </NavigationContainer>

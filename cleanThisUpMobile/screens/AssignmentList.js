@@ -25,13 +25,11 @@ const AssignmentList = ({ assignments, navigation }) => {
 
 const styles = StyleSheet.create({
   list: {
-    // padding: 10,
-    backgroundColor: '#edeeef',
+    backgroundColor: '#4cac84',
+    paddingTop: 25,
   },
   cards: {
-    // flexGrow: 1,
     alignItems: 'center',
-    // marginVertical: 10,
   },
 });
 

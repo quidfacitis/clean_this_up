@@ -51,6 +51,11 @@ const Messages = ({ route }) => {
 
   useEffect(() => {
     fetchMsgs();
+    const fetchMsgsInterval = setInterval(fetchMsgs, 3000);
+    return () => {
+      clearInterval(fetchMsgsInterval);
+    };
+    // fetchMsgs();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -148,6 +153,7 @@ const styles = StyleSheet.create({
     borderColor: '#737078',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderRadius: 15,
     padding: 10,
     height: 55,
     fontSize: 16,
