@@ -3,10 +3,10 @@ import { Icon } from '@iconify/react';
 import plusSquareFill from '@iconify/icons-bi/plus-square-fill';
 import TaskItem from './TaskItem.jsx';
 
-const Tasks = ({tasks, toggleTaskForm, deleteTask}) => {
+const Tasks = ({tasks, toggleTaskForm, deleteTask, toggleTaskAssignmentForm}) => {
 
   let keyCount = 0;
-  const taskItems = tasks.map(t => <TaskItem key={keyCount++} task={t} deleteTask={deleteTask} />);
+  const taskItems = tasks.map(t => <TaskItem key={keyCount++} task={t} deleteTask={deleteTask} toggleTaskAssignmentForm={toggleTaskAssignmentForm} />);
 
   return (
     <div className="staff-container">

@@ -35,7 +35,7 @@ class TaskForm extends Component {
             <label className="staff-form-label" htmlFor="task-title">Title</label>
             <input className="staff-form-input" type="text" id="task-title" onChange={this.onChange} value={title} required />
             <label className="staff-form-label" htmlFor="task-description">Description</label>
-            <textarea  className="staff-form-input" id="task-description" onChange={this.onChange} value={description} maxlength="255" required></textarea>
+            <textarea  className="staff-form-input" id="task-description" onChange={this.onChange} value={description} maxLength="255" required></textarea>
             <input className="staff-form-input" type="submit" value="Add" />
           </form>
           <span onClick={toggleTaskForm} className="staff-form-close"><InlineIcon icon={xIcon} width="2em" /></span>

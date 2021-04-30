@@ -27,30 +27,28 @@ const AssignmentItem = ({ assignment, handlePress }) => {
   }, [isEnabled]);
 
   return (
-    <TouchableOpacity>
-      <View style={styles.card}>
-        <Text style={styles.taskName}>{assignment.task}</Text>
-        <Text style={styles.dueBy}>{assignment.dueBy}</Text>
-        <Switch
-          trackColor={{ false: '#737078', true: '#4cac84' }}
-          thumbColor={isEnabled ? '#edeeef' : '#edeeef'}
-          ios_backgroundColor="#737078"
-          onValueChange={toggleSwitch}
-          value={isEnabled}
-        />
-        <TouchableOpacity style={styles.chatIcon} onPress={handlePress}>
-          <Icon name="comment-o" size={30} color="#4cac84" />
-          <View style={styles.angleIcon}>
-            <Icon name="angle-right" size={25} color="#4cac84" />
-          </View>
-        </TouchableOpacity>
-        {assignment.urgent && (
-          <View style={styles.urgentIcon}>
-            <Icon name="exclamation" size={20} color="#4cac84" />
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
+    <View style={styles.card}>
+      <Text style={styles.taskName}>{assignment.task}</Text>
+      <Text style={styles.dueBy}>{assignment.dueBy}</Text>
+      <Switch
+        trackColor={{ false: '#737078', true: '#4cac84' }}
+        thumbColor={isEnabled ? '#edeeef' : '#edeeef'}
+        ios_backgroundColor="#737078"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+      <TouchableOpacity style={styles.chatIcon} onPress={handlePress}>
+        <Icon name="comment-o" size={30} color="#4cac84" />
+        <View style={styles.angleIcon}>
+          <Icon name="angle-right" size={25} color="#4cac84" />
+        </View>
+      </TouchableOpacity>
+      {assignment.urgent && (
+        <View style={styles.urgentIcon}>
+          <Icon name="exclamation" size={20} color="#4cac84" />
+        </View>
+      )}
+    </View>
   );
 };
 
