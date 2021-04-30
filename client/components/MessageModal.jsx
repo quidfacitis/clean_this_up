@@ -86,7 +86,7 @@ class MessageModal extends Component {
 
     return (
       <div className="form-overlay">
-        <div className="form-container">
+        <div className="message-form-container">
           <h2 className="staff-form-title">Send a Message to {selectedAssignment.name}</h2>
           <div className="message-area">
             {messageItems}

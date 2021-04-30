@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Icon, InlineIcon} from '@iconify/react';
 import plusSquareFill from '@iconify/icons-bi/plus-square-fill';
-import alertUrgent16Filled from '@iconify-icons/fluent/alert-urgent-16-filled';
+// import alertUrgent16Filled from '@iconify-icons/fluent/alert-urgent-16-filled';
+import exclamationIcon from '@iconify/icons-fa-solid/exclamation';
 import AssignmentItem from './AssignmentItem.jsx';
 import Switch from 'react-switch';
 import axios from 'axios';
@@ -20,7 +21,7 @@ class Assignments extends Component {
 
   componentDidMount() {
     this.fetchAssignments();
-    this.interval = setInterval(this.fetchAssignments, 3000);
+    this.interval = setInterval(this.fetchAssignments, 1000);
   }
 
   componentWillUnmount() {
@@ -28,7 +29,6 @@ class Assignments extends Component {
   }
 
   fetchAssignments() {
-    console.log('FETCH ASSIGNMENTS!');
     axios.get('/api/assignments')
       .then((results) => {
         this.setState({
@@ -78,7 +78,7 @@ class Assignments extends Component {
         <div className="assignment-navbar">
           <h2 className="staff-title">Assignments</h2>
           <label className="urgent-switch-container">
-            <div className="urgent-switch-msg">Only<span className="urgent-switch-icon"><InlineIcon icon={alertUrgent16Filled} width="1.5em" color="#737078" /></span></div>
+            <div className="urgent-switch-msg">Only "<span className="urgent-switch-icon"><InlineIcon icon={exclamationIcon} width="0.5em" color="#737078" /></span>"</div>
             <Switch onChange={this.toggleSwitch} checked={checked} onColor="#4cac84" offColor="#737078"/>
           </label>
         </div>
