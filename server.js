@@ -136,7 +136,6 @@ app.get('/api/auth/:id', (req, res) => {
     if (err !== null) {
       res.sendStatus(404);
     } else {
-      console.log(results);
       res.send(results);
     }
   });

@@ -4,14 +4,40 @@ import plusSquareFill from '@iconify/icons-bi/plus-square-fill';
 import alertUrgent16Filled from '@iconify-icons/fluent/alert-urgent-16-filled';
 import AssignmentItem from './AssignmentItem.jsx';
 import Switch from 'react-switch';
+import axios from 'axios';
 
 class Assignments extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      checked: false
+      checked: false,
+      assignments: [],
     }
     this.toggleSwitch = this.toggleSwitch.bind(this);
+    this.fetchAssignments = this.fetchAssignments.bind(this);
+    this.deleteAssignment = this.deleteAssignment.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchAssignments();
+    this.interval = setInterval(this.fetchAssignments, 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  fetchAssignments() {
+    console.log('FETCH ASSIGNMENTS!');
+    axios.get('/api/assignments')
+      .then((results) => {
+        this.setState({
+          assignments: results.data
+        });
+      })
+      .catch((err) => {
+        console.log('Unable to fetch assignments. Error: ', err);
+      });
   }
 
   toggleSwitch() {
@@ -21,16 +47,31 @@ class Assignments extends Component {
     });
   }
 
+  deleteAssignment(id) {
+    axios.delete(`/api/assignments/${id}`)
+      .then(() => {
+        axios.get('/api/assignments')
+          .then((results) => {
+            this.setState({
+              assignments: results.data,
+            });
+          });
+      })
+      .catch((err) => {
+        console.log('Unable to delete assignment. Error message: ', err);
+      });
+  }
+
   render() {
-    let {assignments, toggleAssignmentForm, toggleMessageModal, deleteAssignment} = this.props;
-    const {checked} = this.state;
+    let {toggleAssignmentForm, toggleMessageModal} = this.props;
+    let {checked, assignments} = this.state;
 
     if (checked) {
       assignments = assignments.filter((a) => a.urgent === true);
     }
 
     let keyCount = 0;
-    const assignmentItems = assignments.map(a => <AssignmentItem key={keyCount++} assignment={a} toggleMessageModal={toggleMessageModal} deleteAssignment={deleteAssignment} />);
+    const assignmentItems = assignments.map(a => <AssignmentItem key={keyCount++} assignment={a} toggleMessageModal={toggleMessageModal} deleteAssignment={this.deleteAssignment} />);
 
     return (
       <div className="staff-container">

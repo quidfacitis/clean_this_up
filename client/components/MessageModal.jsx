@@ -11,6 +11,29 @@ class MessageModal extends Component {
       messages: this.props.selectedAssignment.messages
     };
     this.onChange = this.onChange.bind(this);
+    this.fetchMsgs = this.fetchMsgs.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchMsgs();
+    this.interval = setInterval(this.fetchMsgs, 3000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  fetchMsgs() {
+    const {id} = this.props.selectedAssignment;
+    axios.get(`/api/assignments/${id}`)
+      .then((results) => {
+        this.setState({
+          messages: results.data[0].messages
+        });
+      })
+      .catch((err) => {
+        console.log('Unable to fetch messages. Error: ', err);
+      });
   }
 
   onChange(e) {

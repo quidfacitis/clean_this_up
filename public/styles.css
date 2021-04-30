@@ -203,7 +203,7 @@
   top: 25%;
   left: 50%;
   transform: translate(-50%, -25%);
-  width: fit-content;
+  width: 30vw;
   border: 1px solid black;
   border-radius: 10px;
   margin: auto;
@@ -328,4 +328,15 @@
 
 .urgent-switch-icon {
   margin-left: 0.25em;
+}
+
+.done-badge {
+  padding: 0.25em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  text-align: center;
+  border-radius: 15px;
+  color: white;
+  background-color: #b7410e;
+  font-size: 0.75em;
 }
