@@ -10,6 +10,7 @@ import Sidebar from './Sidebar.jsx';
 import StaffForm from './StaffForm.jsx';
 import TaskForm from './TaskForm.jsx';
 import AssignmentForm from './AssignmentForm.jsx';
+import StaffAssignmentForm from './StaffAssignmentForm.jsx';
 import MessageModal from './MessageModal.jsx';
 import Assignments from './Assignments.jsx';
 import Tasks from './Tasks.jsx';
@@ -22,15 +23,18 @@ class App extends Component {
       staffFormOpen: false,
       taskFormOpen: false,
       assignmentFormOpen: false,
+      staffAssignmentFormOpen: false,
       messageModalOpen: false,
       staff: [],
       tasks: [],
       assignments: [],
-      selectedAssignment: null
+      selectedAssignment: null,
+      selectedStaffMember: null,
     }
     this.toggleStaffForm = this.toggleStaffForm.bind(this);
     this.toggleTaskForm = this.toggleTaskForm.bind(this);
     this.toggleAssignmentForm = this.toggleAssignmentForm.bind(this);
+    this.toggleStaffAssignmentForm= this.toggleStaffAssignmentForm.bind(this);
     this.toggleMessageModal = this.toggleMessageModal.bind(this);
     this.addStaffMember = this.addStaffMember.bind(this);
     this.addTask = this.addTask.bind(this);
@@ -82,6 +86,14 @@ class App extends Component {
     const {assignmentFormOpen} = this.state;
     this.setState({
       assignmentFormOpen: !assignmentFormOpen
+    });
+  }
+
+  toggleStaffAssignmentForm(selectedStaffMember) {
+    const {staffAssignmentFormOpen} = this.state;
+    this.setState({
+      staffAssignmentFormOpen: !staffAssignmentFormOpen,
+      selectedStaffMember: selectedStaffMember || null
     });
   }
 
@@ -139,7 +151,7 @@ class App extends Component {
 
   addAssignment(e, name, task, urgent, employee_id, dueBy) {
     e.preventDefault();
-    const {assignmentFormOpen} = this.state;
+    const {assignmentFormOpen, staffAssignmentFormOpen} = this.state;
     const id = new Date().valueOf();
     axios.post('/api/assignments', {id, employee_id, name, task, urgent, dueBy})
     .then(() => {
@@ -147,7 +159,8 @@ class App extends Component {
       .then((results) => {
         this.setState({
           assignments: results.data,
-          assignmentFormOpen: !assignmentFormOpen
+          assignmentFormOpen: false,
+          staffAssignmentFormOpen: false
         });
       });
     })
@@ -206,11 +219,13 @@ class App extends Component {
       staffFormOpen,
       taskFormOpen,
       assignmentFormOpen,
+      staffAssignmentFormOpen,
       messageModalOpen,
       staff,
       tasks,
       assignments,
-      selectedAssignment
+      selectedAssignment,
+      selectedStaffMember
     } = this.state;
 
     return (
@@ -220,13 +235,14 @@ class App extends Component {
           {staffFormOpen && <StaffForm toggleStaffForm={this.toggleStaffForm} addStaffMember={this.addStaffMember} />}
           {taskFormOpen && <TaskForm toggleTaskForm={this.toggleTaskForm} addTask={this.addTask} />}
           {assignmentFormOpen && <AssignmentForm toggleAssignmentForm={this.toggleAssignmentForm} addAssignment={this.addAssignment} staff={staff} tasks={tasks} />}
+          {staffAssignmentFormOpen && <StaffAssignmentForm toggleStaffAssignmentForm={this.toggleStaffAssignmentForm} selectedStaffMember={selectedStaffMember} addAssignment={this.addAssignment} tasks={tasks} />}
           {messageModalOpen && <MessageModal toggleMessageModal={this.toggleMessageModal} selectedAssignment={selectedAssignment} /> }
           <Switch>
             <Route path="/tasks">
               <Tasks toggleTaskForm={this.toggleTaskForm} tasks={tasks} deleteTask={this.deleteTask} />
             </Route>
             <Route path="/staff">
-              <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} deleteStaff={this.deleteStaff} />
+              <Staff toggleStaffForm={this.toggleStaffForm} staff={staff} deleteStaff={this.deleteStaff} toggleStaffAssignmentForm={this.toggleStaffAssignmentForm} />
             </Route>
             <Route exact path="/">
               <Assignments assignments={assignments} toggleAssignmentForm={this.toggleAssignmentForm} toggleMessageModal={this.toggleMessageModal} deleteAssignment={this.deleteAssignment} />

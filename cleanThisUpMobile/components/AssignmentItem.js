@@ -56,9 +56,17 @@ const AssignmentItem = ({ assignment, handlePress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#737078',
+    // borderWidth: 1,
+    // borderStyle: 'solid',
+    // borderColor: '#737078',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
     paddingVertical: 10,
     width: 250,
     minHeight: 150,

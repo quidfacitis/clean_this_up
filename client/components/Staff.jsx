@@ -3,19 +3,10 @@ import { Icon } from '@iconify/react';
 import plusSquareFill from '@iconify/icons-bi/plus-square-fill';
 import StaffMember from './StaffMember.jsx';
 
-
-const dummyData = [
-  {name: "Ron Burgundy", role: "Bathroom crew"},
-  {name: "Alice Frasier", role: "Office crew"},
-  {name: "Andy Zaltzman", role: "Night shift"},
-  {name: "Nish Kumar", role: "Part time"},
-  {name: "Billy Bob Thornton", role: "Kitchen crew"}
-]
-
-const Staff = ({toggleStaffForm, staff, deleteStaff}) => {
+const Staff = ({toggleStaffForm, staff, deleteStaff, toggleStaffAssignmentForm}) => {
 
   let keyCount = 0;
-  const staffMembers = staff.map(member => <StaffMember key={keyCount++} member={member} deleteStaff={deleteStaff} />);
+  const staffMembers = staff.map(member => <StaffMember key={keyCount++} member={member} deleteStaff={deleteStaff} toggleStaffAssignmentForm={toggleStaffAssignmentForm} />);
 
   return (
     <div className="staff-container">

@@ -100,24 +100,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 /* STAFF MEMBER */
 
 .staff-member-card {
-  border: 1px solid #737078;
+  /* border: 1px solid #737078; */
+  border: 1px solid #edeeef;
+  background-color: #edeeef;
   padding: 1em;
   width: 21%;
   height: 10em;
   margin: 1em;
   border-radius: 25px;
-  box-shadow: 1px 1px #737078;
+  /* box-shadow: 1px 1px #737078; */
+  box-shadow:
+  0 -0.4px 8.2px rgba(0, 0, 0, 0.038),
+  0 3.5px 22.8px rgba(0, 0, 0, 0.055),
+  0 31.7px 54.9px rgba(0, 0, 0, 0.072),
+  0 100px 182px rgba(0, 0, 0, 0.11);
   position: relative;
 }
 
-.staff-member-card:hover {
+/* .staff-member-card:hover {
   box-shadow: 2px 2px #737078;
-}
+} */
 
 .staff-name {
   font-size: 1.2em;
@@ -153,13 +161,17 @@
   right: 5px;
 }
 
-.staff-edit {
+.staff-edit,
+.assignment-edit,
+.task-edit {
   margin-right: 0.25em;
   cursor: pointer;
   color: #737078
 }
 
-.staff-delete {
+.staff-delete,
+.assignment-delete,
+.task-delete {
   cursor: pointer;
   color: #737078
 }
@@ -167,6 +179,17 @@
 .staff-edit:hover,
 .staff-delete:hover {
   color: #b7410e;
+}
+
+.assignment-edit:hover,
+.assignment-delete:hover {
+  color: #4cac84;
+}
+
+.task-edit:hover,
+.task-delete:hover {
+  color: #445bb2;
+  ;
 }
 
 .staff-card-task-count {
@@ -204,7 +227,12 @@
   left: 50%;
   transform: translate(-50%, -25%);
   width: 30vw;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  box-shadow:
+  0 0.8px 3.6px rgba(0, 0, 0, 0.105),
+  0 7.6px 10px rgba(0, 0, 0, 0.15),
+  0 42px 24.1px rgba(0, 0, 0, 0.195),
+  0 100px 80px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   margin: auto;
   background-color: white;
@@ -352,4 +380,10 @@
   color: white;
   background-color: #b7410e;
   font-size: 0.75em;
+}
+
+.due-by {
+  margin-top: 0.5em;
+  font-size: 0.85em;
+  color: #4cac84;
 }

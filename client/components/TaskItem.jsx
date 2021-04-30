@@ -10,8 +10,8 @@ const TaskItem = ({task, deleteTask}) => {
       <div className="staff-role">{task.description}</div>
       <div className="staff-card-assign-task" style={{backgroundColor: '#445bb2', width: '8em'}}>Assign to Staff</div>
       <div className="staff-edit-delete-container">
-        <span className="staff-edit"><Icon icon={editSolid} /></span>
-        <span className="staff-delete" onClick={() => deleteTask(task.id)}><Icon icon={delete24Filled} /></span>
+        <span className="task-edit"><Icon icon={editSolid} /></span>
+        <span className="task-delete" onClick={() => deleteTask(task.id)}><Icon icon={delete24Filled} /></span>
       </div>
     </div>
   );

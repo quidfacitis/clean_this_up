@@ -34,9 +34,9 @@ const Sidebar = () => {
           </div>
         </Link>
       </div>
-      <Link to="/">
+      {/* <Link to="/">
         <span className="bottom-right-img"><Icon icon={broomIcon} color="#737078" width="3em"/></span>
-      </Link>
+      </Link> */}
     </div>
   );
 };
